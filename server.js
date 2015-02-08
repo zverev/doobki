@@ -2,11 +2,12 @@
 
 var express = require('express');
 var http = require('http');
+var fs = require('fs');
 
 var app = express();
 
 app.use(function(req, res) {
-    res.send('hello world');
+    res.send(JSON.parse(fs.readFileSync('./config.json')).foo);
 });
 
 console.log('port: ', process.env.OPENSHIFT_NODEJS_PORT || 8080);
