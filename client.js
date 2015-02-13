@@ -14,8 +14,14 @@ $(document).ready(function() {
                     a.push(o[p]);
                 }
             }
-            var bg = a[getRandomInt(0, a.length-1)];
-            $('body').css('background-image', 'url(' + bg.url + ')');
+            var bg = a[getRandomInt(0, a.length - 1)];
+            $('<img>').load(function() {
+                $('.bg').css('opacity', 0);
+                $('.bg').css('background-image', 'url(' + bg.url + ')');
+                $('.bg').animate({
+                    opacity: '1'
+                }, 1500);
+            }).attr('src', bg.url);
         });
     });
 });
