@@ -23,5 +23,13 @@ $(document).ready(function() {
                 }, 1500);
             }).attr('src', bg.url);
         });
+        $.ajax(cfg.timeUrl).then(function(response) {
+            var time = moment(new Date(response/1));
+            var may = moment(new Date(2015, 04, 01));
+            setInterval(function() {
+                time.add(1, 'seconds');
+                $('.countdown').html(may.diff(time, 'seconds'));
+            }, 1000);
+        });
     });
 });

@@ -2,6 +2,7 @@
   "name": "doobki",
   "dependencies": {
     "jquery": "~2.1.3",
-    "firebase": "~2.2.0"
+    "firebase": "~2.2.0",
+    "moment": "~2.9.0"
   }
 }
