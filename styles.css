@@ -1,3 +1,9 @@
+body {
+    padding: 0;
+    margin: 0;
+    background-size: cover;
+}
+
 .countdown {
     font-family: 'Lato' Verdana;
     font-size: 120px;
