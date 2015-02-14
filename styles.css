@@ -18,6 +18,9 @@ body {
     left: 0;
     margin: auto;
     color: #dcdcdc;
+    text-shadow: 0px 0px 6px #c0c0c0;
+    pointer-events: none;
+    cursor: default;
 }
 
 .bg {
