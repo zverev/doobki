@@ -7,10 +7,24 @@
         <script src="bower_components/firebase/firebase.js"></script>
         <script src="bower_components/moment/min/moment.min.js"></script>
         <script src="bower_components/moment/min/locales.min.js"></script>
+        <script src="bower_components/handlebars/handlebars.min.js"></script>
         <script src="client.js"></script>
     </head>
     <body>
-        <div class="background"></div>
-        <div class="countdown"></div>
+        <script id="countdown-template" type="text/x-handlebars-template">
+            <div class="countdown">
+                <div class="countdown-date">
+                    <div class="countdown-entry countdown-months">{{months}}</div>
+                    <div class="countdown-entry countdown-days">{{days}}</div>
+                </div>
+                <div class="countdown-time">
+                    <div class="countdown-entry countdown-hours">{{hours}}</div>
+                    <div class="countdown-entry countdown-minutes">{{minutes}}</div>
+                    <div class="countdown-entry countdown-seconds">{{seconds}}</div>
+                </div>
+            </div>
+        </script>
+        <div class="background-container"></div>
+        <div class="countdown-container"></div>
     </body>
 </html>

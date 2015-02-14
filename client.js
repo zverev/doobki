@@ -7,6 +7,7 @@ var getRandomInt = function(min, max) {
 var Countdown = function(options) {
     this._$placeholder = $(options.placeholder);
     this._currentTime = moment(options.currentTime);
+    this._template = options.template;
     this._mayTime = moment(new Date(2015, 04, 01));
     setInterval(function() {
         this._tick();
@@ -14,19 +15,22 @@ var Countdown = function(options) {
 };
 
 Countdown.prototype._tick = function() {
+    var parseDate = function(current, may) {
+        var o = {};
+        var c = moment(current);
+        var d = moment(may);
+        var entries = ['months', 'days', 'hours', 'minutes', 'seconds'];
+        entries.map(function(e) {
+            // ex: months = clonedTimeToMay.diff(currentTime, 'months');
+            o[e] = d.diff(c, e);
+            // ex: clonedTimeToMay.subtract(months, 'months');
+            d.subtract(o[e], e);
+        });
+        return o;
+    };
+
     this._currentTime.add(1, 'seconds');
-    var t = moment(this._mayTime);
-    var months = t.diff(this._currentTime, 'months');
-    t.subtract(months, 'months');
-    var days = t.diff(this._currentTime, 'days');
-    t.subtract(days, 'days');
-    var hours = t.diff(this._currentTime, 'hours');
-    t.subtract(hours, 'hours');
-    var minutes = t.diff(this._currentTime, 'minutes');
-    t.subtract(minutes, 'minutes');
-    var seconds = t.diff(this._currentTime, 'seconds');
-    t.subtract(seconds, 'seconds');
-    this._$placeholder.html(months + ':' + days + ':' + hours + ':' + minutes + ':' + seconds);
+    this._$placeholder.html(Handlebars.compile(this._template)(parseDate(this._currentTime, this._mayTime)));
 };
 
 // <DOMNode> options.placeholder
@@ -80,16 +84,17 @@ Background.prototype._switch = function(bg) {
 $(document).ready(function() {
     $.ajax('config.json').then(function(cfg) {
         var fb = new Firebase(cfg.backgroundsRef);
-        fb.on('child_added', function(snapshot) {
+        fb.on('value', function(snapshot) {
             new Background({
-                placeholder: $('.background')[0],
+                placeholder: $('.background-container')[0],
                 backgrounds: snapshot.val()
             });
         });
         $.ajax(cfg.timeUrl).then(function(response) {
             new Countdown({
-                placeholder: $('.countdown')[0],
-                currentTime: new Date(response / 1)
+                placeholder: $('.countdown-container')[0],
+                currentTime: new Date(response / 1),
+                template: $('#countdown-template').html()
             });
         });
     });

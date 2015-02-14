@@ -4,14 +4,13 @@ body {
     background: #000;
 }
 
-.countdown {
+.countdown-container {
     z-index: 10;
     font-family: 'Lato' Verdana;
-    font-size: 120px;
     text-align: center;
     position: absolute;
     width: 500px;
-    height: 150px;
+    height: 220px;
     top: 0;
     right: 0;
     bottom: 0;
@@ -23,7 +22,53 @@ body {
     cursor: default;
 }
 
-.background {
+.countdown {
+    width: 100%;
+}
+
+.countdown-date {
+    font-size: 110px;
+    display: table;
+    width: 100%;
+    border-bottom: 1px solid rgba(255,255,255,0.2);
+}
+
+.countdown-time {
+    font-size: 40px;
+    text-shadow: none;
+    color: rgba(255,255,255,0.5);
+    display: table;
+    width: 100%;
+}
+
+.countdown-entry {
+    display: table-cell;
+}
+
+.countdown-months {
+    border-right: 1px solid rgba(255,255,255,0.2);
+    width: 50%;
+}
+
+.countdown-days {
+    width: 50%;
+}
+
+.countdown-hours {
+    width: 33%;
+}
+
+.countdown-minutes {
+    border-left: 1px solid rgba(255,255,255,0.2);
+    border-right: 1px solid rgba(255,255,255,0.2);
+    width: 33%;
+}
+
+.countdown-seconds {
+    width: 33%;
+}
+
+.background-container {
     z-index: 0;
     position: absolute;
     width: 100%;
