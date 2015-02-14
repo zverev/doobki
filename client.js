@@ -2,6 +2,42 @@ var getRandomInt = function(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
+var getCookie = function(name) {
+    var matches = document.cookie.match(new RegExp(
+        "(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
+    ));
+    return matches ? decodeURIComponent(matches[1]) : undefined;
+}
+
+var setCookie = function(name, value, options) {
+    options = options || {};
+
+    var expires = options.expires;
+
+    if (typeof expires == "number" && expires) {
+        var d = new Date();
+        d.setTime(d.getTime() + expires * 1000);
+        expires = options.expires = d;
+    }
+    if (expires && expires.toUTCString) {
+        options.expires = expires.toUTCString();
+    }
+
+    value = encodeURIComponent(value);
+
+    var updatedCookie = name + "=" + value;
+
+    for (var propName in options) {
+        updatedCookie += "; " + propName;
+        var propValue = options[propName];
+        if (propValue !== true) {
+            updatedCookie += "=" + propValue;
+        }
+    }
+
+    document.cookie = updatedCookie;
+}
+
 // <DOMNode> options.placeholder
 // <Date> options.currentTime
 var Countdown = function(options) {
@@ -39,7 +75,7 @@ var Background = function(options) {
     this._backgrounds = options.backgrounds;
     this._$placeholder = $(options.placeholder);
     this._defaultBlur = options.defaultBlur || 0;
-    this._switch(this._pickRandom(this._backgrounds));
+    this._switch(options.id ? this._backgrounds[options.id] : this._pickRandom(this._backgrounds));
 };
 
 // <Object> backgrounds
@@ -89,7 +125,8 @@ $(document).ready(function() {
         fb.on('value', function(snapshot) {
             var background = new Background({
                 placeholder: $('.background-container')[0],
-                backgrounds: snapshot.val()
+                backgrounds: snapshot.val(),
+                id: getCookie('firstrun') ? false : cfg.firstRunBackground
             });
 
             $(background).on('switched', function(e, data) {
@@ -103,7 +140,9 @@ $(document).ready(function() {
                         opacity: 1
                     }, cfg.copyrightAnimationDuration)
                 }, cfg.copyrightTimeout);
-            })
+            });
+
+            setCookie('firstrun', true);
         });
         $.ajax(cfg.timeUrl).then(function(response) {
             new Countdown({
