@@ -15,7 +15,18 @@ var Countdown = function(options) {
 
 Countdown.prototype._tick = function() {
     this._currentTime.add(1, 'seconds');
-    this._$placeholder.html(this._mayTime.diff(this._currentTime, 'seconds'));
+    var t = moment(this._mayTime);
+    var months = t.diff(this._currentTime, 'months');
+    t.subtract(months, 'months');
+    var days = t.diff(this._currentTime, 'days');
+    t.subtract(days, 'days');
+    var hours = t.diff(this._currentTime, 'hours');
+    t.subtract(hours, 'hours');
+    var minutes = t.diff(this._currentTime, 'minutes');
+    t.subtract(minutes, 'minutes');
+    var seconds = t.diff(this._currentTime, 'seconds');
+    t.subtract(seconds, 'seconds');
+    this._$placeholder.html(months + ':' + days + ':' + hours + ':' + minutes + ':' + seconds);
 };
 
 // <DOMNode> options.placeholder
