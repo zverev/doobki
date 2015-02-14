@@ -24,7 +24,26 @@
                 </div>
             </div>
         </script>
+        <script id="copyright-template" type="text/x-handlebars-template">
+            {{#if by}}
+                {{#if title}}
+                    <div class="copyright">
+                        <div class="copyright-title">
+                            {{title}}
+                        </div>
+                        <div class="copyright-by">
+                            by <a href="http://instagram.com/{{by}}" target="_blank">@{{by}}</a>
+                        </div>
+                    </div>
+                {{else}}
+                    <div class="copyright">
+                        photo by <a href="http://instagram.com/{{by}}" target="_blank">@{{by}}</a>
+                    </div>
+                {{/if}}
+            {{/if}}
+        </script>
         <div class="background-container"></div>
         <div class="countdown-container"></div>
+        <div class="copyright-container"></div>
     </body>
 </html>

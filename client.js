@@ -77,18 +77,33 @@ Background.prototype._switch = function(bg) {
 
         $bg.animate({
             opacity: bg.opacity ? bg.opacity + '' : '1'
-        }, 1500);
-    }).attr('src', bg.url);
+        }, 1500, function() {
+            $(this).trigger('switched', [bg]);
+        }.bind(this));
+    }.bind(this)).attr('src', bg.url);
 };
 
 $(document).ready(function() {
     $.ajax('config.json').then(function(cfg) {
         var fb = new Firebase(cfg.backgroundsRef);
         fb.on('value', function(snapshot) {
-            new Background({
+            var background = new Background({
                 placeholder: $('.background-container')[0],
                 backgrounds: snapshot.val()
             });
+
+            $(background).on('switched', function(e, data) {
+                setTimeout(function() {
+                    $('.copyright-container').css('opacity', 0);
+                    $('.copyright-container').html(Handlebars.compile($('#copyright-template').html())({
+                        title: data.title,
+                        by: data.by
+                    }));
+                    $('.copyright-container').animate({
+                        opacity: 1
+                    }, cfg.copyrightAnimationDuration)
+                }, cfg.copyrightTimeout);
+            })
         });
         $.ajax(cfg.timeUrl).then(function(response) {
             new Countdown({
