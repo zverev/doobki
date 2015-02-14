@@ -17,6 +17,10 @@ a:hover {
     color: rgba(255,255,255,1);
 }
 
+.text-center {
+    text-align: center;
+}
+
 .countdown-container {
     z-index: 10;
     text-align: center;
