@@ -1,0 +1,25 @@
+{
+  "firstRunBackground": "dunkel",
+  "backgrounds" : {
+    "dunkel" : {
+      "by" : "ehnis",
+      "opacity" : 0.65,
+      "title" : "Dunkel",
+      "url" : "http://cs10485.vk.me/u3010164/138797612/w_570e6bb5.jpg"
+    },
+    "railroadnight" : {
+      "url" : "http://cs10485.vk.me/u3010164/138797612/w_67be9aec.jpg"
+    },
+    "ranch" : {
+      "by" : "farglowparty",
+      "opacity" : 0.6,
+      "title" : "The Ranch",
+      "url" : "http://cs619119.vk.me/v619119501/7f47/4hlDBIt7YBo.jpg"
+    },
+    "sister" : {
+      "blur" : 2,
+      "opacity" : 0.85,
+      "url" : "http://cs418927.vk.me/v418927501/490b/8Fxlu3vG3NQ.jpg"
+    }
+  }
+}

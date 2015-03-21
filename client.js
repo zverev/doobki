@@ -121,12 +121,11 @@ Background.prototype._switch = function(bg) {
 
 $(document).ready(function() {
     $.ajax('config.json').then(function(cfg) {
-        var fb = new Firebase(cfg.backgroundsRef);
-        fb.on('value', function(snapshot) {
+        $.ajax('backgrounds.json').then(function(resp) {
             var background = new Background({
                 placeholder: $('.background-container')[0],
-                backgrounds: snapshot.val(),
-                id: getCookie('firstrun') ? false : cfg.firstRunBackground
+                backgrounds: resp.backgrounds,
+                id: getCookie('firstrun') ? false : resp.firstRunBackground
             });
 
             $(background).on('switched', function(e, data) {
@@ -143,7 +142,10 @@ $(document).ready(function() {
             });
 
             setCookie('firstrun', true);
+        }).fail(function() {
+            console.error(arguments)
         });
+
         $.ajax(cfg.timeUrl).then(function(response) {
             new Countdown({
                 placeholder: $('.countdown-container')[0],
