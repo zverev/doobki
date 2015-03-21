@@ -108,7 +108,7 @@ a:hover {
 
 .copyright {
     color: rgba(255,255,255,0.75);
-    font-family: 'Lato' Verdana;
+    font-family: 'Lato', Verdana;
     font-size: 12px;
     color: #fff;
     display: table;
