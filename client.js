@@ -45,6 +45,8 @@ var Countdown = function(options) {
     this._currentTime = moment(options.currentTime);
     this._template = options.template;
     this._mayTime = moment(new Date(2015, 04, 01));
+    this._$placeholder.html(Handlebars.compile(this._template)());
+    this._tick();
     setInterval(function() {
         this._tick();
     }.bind(this), 1000);
@@ -66,7 +68,12 @@ Countdown.prototype._tick = function() {
     };
 
     this._currentTime.add(1, 'seconds');
-    this._$placeholder.html(Handlebars.compile(this._template)(parseDate(this._currentTime, this._mayTime)));
+    var dt = parseDate(this._currentTime, this._mayTime);
+    this._$placeholder.find('.countdown-seconds').html(dt.seconds);
+    this._$placeholder.find('.countdown-minutes').html(dt.minutes);
+    this._$placeholder.find('.countdown-hours').html(dt.hours);
+    this._$placeholder.find('.countdown-days').html(dt.days);
+    this._$placeholder.find('.countdown-months').html(dt.months);
 };
 
 // <DOMNode> options.placeholder
