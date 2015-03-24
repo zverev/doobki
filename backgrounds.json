@@ -20,6 +20,43 @@
       "blur" : 2,
       "opacity" : 0.85,
       "url" : "http://cs418927.vk.me/v418927501/490b/8Fxlu3vG3NQ.jpg"
+    },
+    "oneshroom": {
+      "opacity": 0.7,
+      "url": "http://cs623918.vk.me/v623918164/26a41/CH4CBygKaOs.jpg"
+    },
+    "waltz" : {
+      "title": "Waltz",
+      "by": "ehnis",
+      "opacity": 0.6,
+      "url" : "http://cs623918.vk.me/v623918164/26951/2EQpG2VLwMM.jpg"
+    },
+    "legs" : {
+      "opacity": 0.4,
+      "url" : "http://cs623918.vk.me/v623918164/2695b/AGL8hjaoEu0.jpg"
+    },
+    "menots" : {
+      "title": "Me-nots",
+      "by": "ehnis",
+      "opacity": 0.6,
+      "url" : "http://cs623918.vk.me/v623918164/26861/IXS-RZEMrEY.jpg"
+    },
+    "shroomsrows" : {
+      "opacity": 0.3,
+      "url" : "http://cs623918.vk.me/v623918164/26d20/1w0NSWbDAWU.jpg"
+    },
+    "tor" : {
+      "opacity": 0.4,
+      "url" : "http://cs623918.vk.me/v623918164/26ccf/49A8cqp2FsA.jpg"
+    },
+    "onion" : {
+      "opacity": 0.5,
+      "url" : "http://cs623918.vk.me/v623918164/26c36/4dLbJQz0a4E.jpg"
+    },
+    "waytomay" : {
+      "title": "Way to May",
+      "opacity": 0.5,
+      "url" : "http://cs623918.vk.me/v623918164/26bca/YFXupn8RfYo.jpg"
     }
   }
 }
