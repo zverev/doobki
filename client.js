@@ -131,8 +131,7 @@ $(document).ready(function() {
         $.ajax('backgrounds.json').then(function(resp) {
             var background = new Background({
                 placeholder: $('.background-container')[0],
-                backgrounds: resp.backgrounds,
-                id: getCookie('firstrun') ? false : resp.firstRunBackground
+                backgrounds: resp.backgrounds
             });
 
             $(background).on('switched', function(e, data) {
