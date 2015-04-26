@@ -110,10 +110,10 @@ Background.prototype._switch = function(bg) {
 
     $(this).trigger('switching', [bg]);
 
-    var $previousBg = this._$placeholder.find('.background-container').animate({
+    var $previousBg = this._$placeholder.find('.backgroundContainer').animate({
         opacity: 0
     }, 750);
-    var $bg = $('<div>').addClass('background-container');
+    var $bg = $('<div>').addClass('backgroundContainer');
     this._$placeholder.append($bg);
 
     $('<img>').load(function() {
@@ -127,62 +127,67 @@ Background.prototype._switch = function(bg) {
         $bg.animate({
             opacity: bg.opacity ? bg.opacity + '' : '1'
         }, 1500, function() {
-            this._$placeholder.find('.background-container_dying').remove();
+            this._$placeholder.find('.backgroundContainer_dying').remove();
             $(this).trigger('switched', [bg]);
         }.bind(this));
     }.bind(this)).attr('src', bg.url);
 };
 
-Background.prototype.switchRandom = function () {
+Background.prototype.switchRandom = function() {
     this._switch(this._pickRandom(this._backgrounds));
 }
 
 $(document).ready(function() {
     $.ajax('config.json').then(function(cfg) {
-        $.ajax('backgrounds.json').then(function(resp) {
+        $.when(
+            $.ajax(cfg.timeUrl),
+            $.ajax('backgrounds.json')
+        ).then(function(respTime, respBg) {
             var background = new Background({
-                placeholder: $('.background-container')[0],
-                backgrounds: resp.backgrounds
+                placeholder: $('.backgroundContainer')[0],
+                backgrounds: respBg[0].backgrounds
             });
-
-            setInterval(function() {
-                background.switchRandom();
-            }, 10000);
 
             $(background).on('switching', function(e, data) {
                 setTimeout(function() {
-                    $('.copyright-container').animate({
+                    $('.copyrightContainer').animate({
                         opacity: 0
                     }, cfg.copyrightAnimationDuration, function() {
-                        $('.copyright-container').empty();
+                        $('.copyrightContainer').empty();
                     })
                 }, cfg.copyrightTimeout);
             });
 
             $(background).on('switched', function(e, data) {
                 setTimeout(function() {
-                    $('.copyright-container').css('opacity', 0);
-                    $('.copyright-container').html(Handlebars.compile($('#copyright-template').html())({
+                    $('.copyrightContainer').css('opacity', 0);
+                    $('.copyrightContainer').html(Handlebars.compile($('#copyright-template').html())({
                         title: data.title,
                         by: data.by
                     }));
-                    $('.copyright-container').animate({
+                    $('.copyrightContainer').animate({
                         opacity: 1
                     }, cfg.copyrightAnimationDuration)
                 }, cfg.copyrightTimeout);
             });
 
             setCookie('firstrun', true);
-        }).fail(function() {
-            console.error(arguments)
-        });
 
-        $.ajax(cfg.timeUrl).then(function(response) {
-            new Countdown({
-                placeholder: $('.countdown-container')[0],
-                currentTime: new Date(response / 1),
-                template: $('#countdown-template').html()
-            });
+            respTime[0] = 1430427600000;
+
+            if ((new Date(respTime[0] / 1)).getMonth() > 3) {
+                $('.centerContainer').addClass('centerContainer_countdownClosed').html('countdown closed. enjoy the summer');
+            } else {
+                new Countdown({
+                    placeholder: $('.centerContainer').addClass('centerContainer_countdown')[0],
+                    currentTime: new Date(respTime[0] / 1),
+                    template: $('#countdown-template').html()
+                });
+
+                setInterval(function() {
+                    background.switchRandom();
+                }, 10000);
+            }
         });
     });
 });

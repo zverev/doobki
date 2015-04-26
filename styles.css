@@ -2,6 +2,7 @@ body {
     padding: 0;
     margin: 0;
     background: #000;
+    font-family: 'Lato', Verdana;
 }
 
 a {
@@ -21,12 +22,10 @@ a:hover {
     text-align: center;
 }
 
-.countdown-container {
+.centerContainer {
     z-index: 10;
     text-align: center;
     position: absolute;
-    width: 500px;
-    height: 220px;
     top: 0;
     right: 0;
     bottom: 0;
@@ -38,8 +37,17 @@ a:hover {
     cursor: default;
 }
 
+.centerContainer_countdown {
+    width: 500px;
+    height: 220px;
+}
+
+.centerContainer_countdownClosed {
+    width: 500px;
+    height: 20px;
+}
+
 .countdown {
-    font-family: 'Lato', Verdana;
     width: 100%;
 }
 
@@ -85,7 +93,7 @@ a:hover {
     width: 33%;
 }
 
-.background-container {
+.backgroundContainer {
     z-index: 10;
     position: absolute;
     width: 100%;
@@ -97,11 +105,11 @@ a:hover {
     background-size: cover;
 }
 
-.background-container_dying {
+.backgroundContainer_dying {
     z-index: 0;
 }
 
-.copyright-container {
+.copyrightContainer {
     position: absolute;
     z-index: 200;
     left: 0;
