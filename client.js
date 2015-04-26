@@ -173,8 +173,6 @@ $(document).ready(function() {
 
             setCookie('firstrun', true);
 
-            respTime[0] = 1430427600000;
-
             if ((new Date(respTime[0] / 1)).getMonth() > 3) {
                 $('.centerContainer').addClass('centerContainer_countdownClosed').html('countdown closed. enjoy the summer');
             } else {
