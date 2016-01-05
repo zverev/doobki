@@ -44,7 +44,7 @@ var Countdown = function(options) {
     this._$placeholder = $(options.placeholder);
     this._currentTime = moment(options.currentTime);
     this._template = options.template;
-    this._mayTime = moment(new Date(2015, 04, 01));
+    this._mayTime = moment(new Date(this._currentTime.year(), 04, 01));
     this._$placeholder.html(Handlebars.compile(this._template)());
     this._tick();
     setInterval(function() {
